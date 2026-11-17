@@ -1,0 +1,35 @@
+mRNADesign snapshot
+===================
+
+Name:        mrnadesign-20261117T031707Z-t04-golden-fixtures
+Taken (UTC): 20261117T031707Z
+Label:       t04-golden-fixtures
+Files:       26
+Source:      /home/khengoon/projects/mRNADesign
+
+What this is
+------------
+A point-in-time copy of the mRNADesign working tree. The project has no git
+repository yet by decision (DECISIONS.md D-011); this archive is the record.
+
+Excluded on purpose
+-------------------
+backups/       (never nest snapshots)
+outputs/       (generated run bundles)
+agent-skills/  (agent tooling, not part of the deliverable)
+.venv/, caches and bytecode
+
+Restore
+-------
+  mkdir restore && tar -xzf mrnadesign-20261117T031707Z-t04-golden-fixtures.tar.gz -C restore
+
+Verify integrity
+----------------
+  (cd backups && sha256sum -c SHA256SUMS)
+
+Scope note
+----------
+A snapshot is a state, not an approval. It records what the files said at
+20261117T031707Z, not that they were correct. Archives live on the same disk as the
+workspace; an off-machine copy is not required by decision (D-020), and the
+risk that follows from that is recorded there.

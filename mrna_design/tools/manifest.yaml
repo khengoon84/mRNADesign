@@ -1,0 +1,36 @@
+stale_after_days: 90
+tools:
+  - name: lineardesign
+    source: https://github.com/LinearDesign
+    pinned_revision: "v1.0"
+    licence: "research_only"
+    licence_class: research_only
+    import_name: lineardesign
+    gpu_required: false
+    runtime_estimate: "minutes"
+    disk_estimate: "100MB"
+    last_verified: "2026-11-17"
+    maturity: proven
+  - name: codonbert
+    source: https://github.com/.../codonbert
+    pinned_revision: "v1.0"
+    licence: "permissive"
+    licence_class: permissive
+    import_name: codonbert
+    gpu_required: false
+    runtime_estimate: "seconds"
+    disk_estimate: "50MB"
+    last_verified: "2026-11-17"
+    maturity: proven
+  - name: signalp
+    source: https://...
+    pinned_revision: "n/a"
+    licence: "excluded"
+    licence_class: excluded
+    import_name: signalp
+    gpu_required: false
+    runtime_estimate: "n/a"
+    disk_estimate: "n/a"
+    last_verified: "2026-11-17"
+    excluded: true
+    exclusion_reason: "licence-gated predictor (D-009)"

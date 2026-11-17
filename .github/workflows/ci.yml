@@ -1,0 +1,59 @@
+# CI baseline (T02).
+#
+# The project has no git repository until T69 (DECISIONS.md D-011, D-016), so
+# this workflow is written now and activates when the repository starts. Until
+# then "CI green" means the identical command sequence passing locally:
+#
+#   ruff check . && ruff format --check .
+#   mypy mrna_design
+#   pytest -m "not network and not gpu and not e2e"
+#   pytest -m "not network and not gpu and not e2e" \
+#       --cov=mrna_design --cov-report=term-missing --cov-fail-under=80
+#
+# The runtime is pinned to the Colab Python (SPEC-notebook-shell.md §Stack).
+# Network, GPU and e2e suites are separate opt-in jobs added by the tasks that
+# can run them (T12, T15, T68); this job is the always-green default path.
+
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: quality (python 3.11)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Format
+        run: ruff format --check .
+
+      - name: Types
+        run: mypy mrna_design
+
+      - name: Tests
+        run: pytest -m "not network and not gpu and not e2e"
+
+      - name: Coverage
+        run: >-
+          pytest -m "not network and not gpu and not e2e"
+          --cov=mrna_design --cov-report=term-missing --cov-fail-under=80

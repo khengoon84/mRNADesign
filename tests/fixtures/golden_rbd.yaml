@@ -1,0 +1,30 @@
+# Golden-case configuration fixture (T04).
+#
+# Source protein: tests/fixtures/golden_rbd/protein.fasta
+#   UniProtKB P0DTC2 (SPIKE_SARS2), feature "Region 319..541 Receptor-binding
+#   domain (RBD)"; entry version 32, sequence version 1. Provenance, retrieval
+#   date and both file hashes are in docs/fixtures.md.
+#
+# The shape follows the approved field taxonomy (NS-1.2a) but is not yet
+# schema-validated: RunConfig lands at T05 and the real default adapter set at
+# T40. A key that is not yet decidable is null, never an invented value.
+
+run_modules: [design, construct]
+
+# required (NS-1.2): the only field a user must supply. Inlined from the FASTA
+# above so a headless run needs no path resolution; tests/unit/test_fixtures.py
+# asserts the two stay identical.
+protein_sequence: RVQPTESIVRFPNITNLCPFGEVFNATRFASVYAWNRKRISNCVADYSVLYNSASFSTFKCYGVSPTKLNDLCFTNVYADSFVIRGDEVRQIAPGQTGKIADYNYKLPDDFTGCVIAWNSNNLDSKVGGNYNYLYRLFRKSNLKPFERDISTEIYQAGSTPCNGVEGFNCYFPLQSYGFQPTNGVGYQPYRVVVLSFELLHAPATVCGPKKSTNLVKNKCVNF
+
+# material (NS-1.2a): never defaulted. Absent (null) is a declared skip, not an
+# error, and resolves the construct to a linear PCR template (DC-3.0).
+backbone_path: null
+
+# representation (NS-1.2a)
+template_type: pcr       # DC-2.0; vocabulary is pcr | plasmid
+poly_a_length: null      # used only when template_type=plasmid; no tract for pcr (DC-2.2)
+construct_source: null   # RD-4.1b; named adapter, resolved at T40, never "the first result"
+
+# placeholder: the default adapter set is decided at T40 (G25-B: codonbert CDS
+# + reference UTRs). null means "not encoded yet", never "run nothing".
+default_adapters: null

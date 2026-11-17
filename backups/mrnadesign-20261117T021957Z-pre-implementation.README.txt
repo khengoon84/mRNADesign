@@ -1,0 +1,33 @@
+mRNADesign snapshot
+===================
+
+Name:        mrnadesign-20261117T021957Z-pre-implementation
+Taken (UTC): 20261117T021957Z
+Label:       pre-implementation
+Files:       15
+Source:      /home/khengoon/projects/mRNADesign
+
+What this is
+------------
+A point-in-time copy of the mRNADesign working tree. The project has no git
+repository yet by decision (DECISIONS.md D-011); this archive is the record.
+
+Excluded on purpose
+-------------------
+snapshots/     (never nest snapshots)
+outputs/       (generated run bundles)
+agent-skills/  (agent tooling, not part of the deliverable)
+caches and bytecode
+
+Restore
+-------
+  mkdir restore && tar -xzf mrnadesign-20261117T021957Z-pre-implementation.tar.gz -C restore
+
+Verify integrity
+----------------
+  sha256sum -c SHA256SUMS
+
+Scope note
+----------
+A snapshot is a state, not an approval. It records what the files said at
+20261117T021957Z, not that they were correct.
